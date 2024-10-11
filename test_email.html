@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Email with EmailJS</title>
+  </head>
+
+  <body>
+    <h1>Send Test Email</h1>
+    <form id="email-form">
+      <div class="input">
+          <input type="text" placeholder="Name" id="user_name" name="user_name" required>
+      </div>
+      <div class="input">
+        <input
+          type="email"
+          placeholder="Email Address"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <!-- <div class="input">
+          <input type="text" placeholder="Social Media Link" id="link" name="link" required>
+      </div> -->
+      <!-- <div class="message"> -->
+      <textarea
+        rows="20"
+        placeholder="Message"
+        id="message"
+        name="message"
+      ></textarea>
+      <!-- </div> -->
+      <button type="submit">SUBMIT</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      emailjs.init("ujo5yM-K3MnFQJXzS"); // Replace with your EmailJS user ID
+
+      document
+        .getElementById("email-form").addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          let comment = document.getElementById('message');
+          let comment_value = comment.value;
+
+          var templateParams = {
+            // from_email: "cryptenzyme@gmail.com",
+            to_email: document.getElementById('email').value,
+            user_name: document.getElementById('user_name').value,
+            // message: document.getElementById("message").value,
+            message: comment_value,
+          };
+
+          emailjs.send('ak47@Nigeria', 'template_px3yihh', templateParams)
+            .then(
+              function (response) {
+                alert("Message sent successfully!");
+                alert(comment_value);
+              },
+              function (error) {
+                alert("Failed to send message.");
+              }
+            );
+        });
+    </script>
+
+    <!-- EmailJS SDK -->
+    <!-- <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "ujo5yM-K3MnFQJXzS",
+        });
+      })();
+    </script> -->
+    <!-- <script src="https://cdn.emailjs.com/dist/email.min.js"></script> -->
+    <!-- <script>
+    // var Link = document.getElementById('link').value;
+
+    
+    // let comment = document.getElementById('messsage').value;
+    // alert(comment);
+  </script> -->
+    <!-- <script>
+
+    Initialize EmailJS
+    emailjs.init("ujo5yM-K3MnFQJXzS"); // Replace with your EmailJS User ID
+
+    //     alert(comment);
+
+    document.getElementById('email-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Collect email input value
+      var Email = document.getElementById('user-email').value;
+      let name = document.getElementById('user_name').value;
+      reciever_email = 'olumideakinloye24@gmail.com';
+
+
+      // Send email using EmailJS
+      emailjs.send('ak47@Nigeria', 'template_px3yihh', {
+        to_email: reciever_email,
+        user_name: name,
+        email: Email,
+        // link: Link,
+        message: comment
+      })
+        .then(function (response) {
+          alert('Email sent successfully!');
+          
+        }, function (error) {
+          alert('Failed to send email. Error: ' + JSON.stringify(error));
+        });
+    });
+  </script> -->
+  </body>
+</html>
